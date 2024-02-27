@@ -29,7 +29,7 @@ func setEnabled(fd uintptr, enabled bool) bool {
 		mode &= ^enableVirtualTerminalProcessing
 	}
 
-	r, _, errno := setConsoleMode.Call(fd, uintptr(mode))
+	r, _, _ := setConsoleMode.Call(fd, uintptr(mode))
 	if r == 0 {
 		return false
 	}
