@@ -5,8 +5,8 @@ import (
 )
 
 var (
-	kernel32       *syscall.LazyDLL  = syscall.NewLazyDLL("Kernel32.dll")
-	setConsoleMode *syscall.LazyProc = kernel32.NewProc("SetConsoleMode")
+	kernel32       = syscall.NewLazyDLL("Kernel32.dll")
+	setConsoleMode = kernel32.NewProc("SetConsoleMode")
 )
 
 // enableVirtualTerminalProcessing enables virtual terminal sequences.
@@ -30,9 +30,6 @@ func setEnabled(fd uintptr, enabled bool) bool {
 	}
 
 	r, _, _ := setConsoleMode.Call(fd, uintptr(mode))
-	if r == 0 {
-		return false
-	}
 
-	return true
+	return r != 0
 }
