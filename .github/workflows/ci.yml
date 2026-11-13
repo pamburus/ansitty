@@ -34,8 +34,8 @@ jobs:
         include:
           # Minimum supported version.
           # GOTOOLCHAIN=local makes the job fail instead of silently switching to a newer toolchain.
-          # The exact .0 release also catches dependency updates that raise the go directive to a newer patch.
-          - go: '1.18.0'
+          # Go before 1.21 also rejects go directives with a patch version, such as 1.18.0.
+          - go: '1.18'
             gotoolchain: local
           - go: '1.27'
     env:
